@@ -212,6 +212,7 @@ impl IVirtualDesktopNotification_Impl for VirtualDesktopNotification_Impl {
         desktop: ComIn<IVirtualDesktop>,
         name: HSTRING,
     ) -> HRESULT {
+        let name = std::mem::ManuallyDrop::new(name);
         eat_error(|| {
             (self.sender)(DesktopEvent::DesktopWallpaperChanged(
                 desktop.try_into()?,
@@ -284,6 +285,7 @@ impl IVirtualDesktopNotification_Impl for VirtualDesktopNotification_Impl {
         desktop: ComIn<IVirtualDesktop>,
         name: HSTRING,
     ) -> HRESULT {
+        let name = std::mem::ManuallyDrop::new(name);
         eat_error(|| {
             (self.sender)(DesktopEvent::DesktopNameChanged(
                 desktop.try_into()?,
